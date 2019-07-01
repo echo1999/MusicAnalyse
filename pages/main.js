@@ -11,22 +11,17 @@
     // Resize
     resize: true,
 
-    // autoplay: false,
 
     isMobile: window.matchMedia('(max-width: 768px)').matches,
-
-    playButton: document.querySelector('#play'),
-    pauseButton: document.querySelector('#pause'),
-
     // Array of objects containing the src and type
     // of different video formats to add
     src: [
       {
-        src: '../packages/night.mp4',
+        src: '../packages/indexBackground.mp4',
         type: 'video/mp4'
       },
       {
-        src: '../packages/night.webm',
+        src: '../packages/indexBackground.webm',
         type: 'video/webm;codecs="vp8, vorbis"'
       }
     ],

@@ -16,15 +16,6 @@
     // The Video element
     this.videoEl = null;
 
-    // Approximate Loading Rate
-    //
-    // The value will be a number like 0.8
-    // which means to load 4 seconds of the video
-    // it takes 5 seconds. If the number is super low
-    // like 0.2 (regular 3g connections) then you can
-    // decide whether to play the video or not.
-    // This behaviour will be controller with
-    // the `acceptableLoadingRate` option.
     this.approxLoadingRate = null;
 
     // Methods to which `this` will be bound
