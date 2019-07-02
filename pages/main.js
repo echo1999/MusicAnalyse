@@ -17,11 +17,11 @@
     // of different video formats to add
     src: [
       {
-        src: '../packages/indexBackground.mp4',
+        src: '../../packages/indexBackground.mp4',
         type: 'video/mp4'
       },
       {
-        src: '../packages/indexBackground.webm',
+        src: '../../packages/indexBackground/indexBackground.webm',
         type: 'video/webm;codecs="vp8, vorbis"'
       }
     ],
