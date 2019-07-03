@@ -94,11 +94,11 @@
 			volumeSetbacks = $(_this.setbacks.volumeSetbacks),
 			volumeBox = $(_this.volume.volumeBox),
 			play = $(_this.button.play),
-			prev = $(_this.button.prev),
-			next = $(_this.button.next),
-			menuBtn = $(_this.button.menu),
+			// prev = $(_this.button.prev),
+			// next = $(_this.button.next),
+			// menuBtn = $(_this.button.menu),
 			volume = $(_this.button.volume),
-			menuClose = $(_this.button.menuClose),
+			// menuClose = $(_this.button.menuClose),
 			backs = $(_this.button.backs);
 
 		_this.createAudio = function(){
@@ -121,9 +121,9 @@
 			_this.volumeSet();
 
 			title.text(song[songEq].title || '未知歌曲');
-			cover.css({
-				'backgroundImage' : 'url('+(song[songEq].cover || '')+')'
-			});
+			// cover.css({
+			// 	'backgroundImage' : 'url('+(song[songEq].cover || '')+')'
+			// });
 
 			function setDuration(){
 
@@ -254,31 +254,31 @@
 			});
 		}
 
-		_this.newSong = function(_new,_bool){
+		// _this.newSong = function(_new,_bool){
 
-			if( typeof(_new) == 'object' ){
+		// 	if( typeof(_new) == 'object' ){
 
-				if(_new.src){
+		// 		if(_new.src){
 
-					if(_this.song){
+		// 			if(_this.song){
 
-						_this.song.push(_new);
-					}else{
+		// 				_this.song.push(_new);
+		// 			}else{
 
-						_this.song = [_new];
-					}
+		// 				_this.song = [_new];
+		// 			}
 					
-					_this.upMenu();
-					(_bool) && _this.selectMenu(_this.song.length-1,true);
-				}else{
+		// 			_this.upMenu();
+		// 			(_bool) && _this.selectMenu(_this.song.length-1,true);
+		// 		}else{
 
-					alert('对象缺省src属性');
-				}
-			}else{
+		// 			alert('对象缺省src属性');
+		// 		}
+		// 	}else{
 
-				alert('这不是一个对象');
-			}
-		}
+		// 		alert('这不是一个对象');
+		// 	}
+		// }
 
 		var volumeTime;
 		volumeBox.on('mousedown',function(){
@@ -353,29 +353,29 @@
 			_this.playAudio();
 		});
 		
-		menuBtn.on('click',function(){
+		// menuBtn.on('click',function(){
 
-			$(_this.menu.menuView).toggleClass('menu-show');
-		});
+		// 	$(_this.menu.menuView).toggleClass('menu-show');
+		// });
 
-		prev.on('click',function(){
+		// prev.on('click',function(){
 
-			--songEq;
-			songEq = (songEq >= 0) ? songEq :  _this.song.length -1;
-			_this.selectMenu(songEq,true);
-		});
+		// 	--songEq;
+		// 	songEq = (songEq >= 0) ? songEq :  _this.song.length -1;
+		// 	_this.selectMenu(songEq,true);
+		// });
 
-		next.on('click',function(){
+		// next.on('click',function(){
 
-			++songEq;
-			songEq = (songEq < _this.song.length) ? songEq : 0;
-			_this.selectMenu(songEq,true);
-		});
+		// 	++songEq;
+		// 	songEq = (songEq < _this.song.length) ? songEq : 0;
+		// 	_this.selectMenu(songEq,true);
+		// });
 
-		menuClose.on('click',function(){
+		// menuClose.on('click',function(){
 
-			$(_this.menu.menuView).removeClass('menu-show');
-		});
+		// 	$(_this.menu.menuView).removeClass('menu-show');
+		// });
 
 		volume.on('click',function(){
 
