@@ -1,33 +1,36 @@
 <!doctype html>
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <title>选择音乐</title>
   <meta name="keywords" content="css3, html5, js, background video, fullscreen video">
-  <!-- <meta name="description" content="Super easy to implement HTML5 fullscreen background video library in JavaScript."> -->
-  <link rel="stylesheet" href="index.css" type="text/css">
-  <!-- <script src="https://use.typekit.net/nlq1kdt.js"></script> -->
-  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  <link rel="stylesheet" href="list.css" type="text/css">
+  <script>
+    try {
+      Typekit.load({
+        async: true
+      });
+    } catch (e) {}
+  </script>
 </head>
+
 <body>
   <div id="container">
     <video id="background_video" loop muted></video>
     <div id="video_cover"></div>
     <div id="overlay"></div>
 
-    <section id="main_content">
-      <div id="head">
-        <h1>开启音乐分析之行</h1><br>
-        <form class="filter-form" data-v-8eed340e="">
-          <input class="inputsearch" data-v-8eed340e="" name="" placeholder="Input Music Name" type="text">
+    <div id="top">
+      <form class="filter-form" data-v-8eed340e="">
+        <input class="inputsearch" data-v-8eed340e="" name="" placeholder="Input Music Name" type="text">
       </form>
-        
+    </div>
+    <div id="main">
+      <div id="list">
+        <!-- 该部分由js代码填充 -->
       </div>
-
-      <div id="links">
-        <a>Start</a>
-      </div>
-    </section>
+    </div>
   </div>
 
   <script src="../bideo.js"></script>
@@ -38,5 +41,8 @@
       window.location.protocol = "https";
     }
   </script>
+  <script src="./list.js"></script>
+
 </body>
+
 </html>
