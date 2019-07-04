@@ -1,3 +1,5 @@
+// const Sea = require('../../packages/bigsea.js')
+
 let res = {
   "ok": true,
   "message": "\u63d0\u53d6\u6570\u636e",
@@ -92,14 +94,6 @@ let res = {
     ]
   ]
 }
-// if (res.ok) {
-//   for (let i = 0; i < res.data.length; i++) {
-//     const e = res.data[i]
-//     const name = e[1]
-//     const singer = e[2]
-//   console.log('🐸', name, singer)    
-//   }
-// }
 if (res.ok) {
   let html2 = ''
   for (let i = 0; i < res.data.length; i++) {

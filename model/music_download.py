@@ -1,15 +1,27 @@
 #!/usr/bin/env python
 # encoding: utf-8
 import requests
-import random, math
+import random
+import math
 from Crypto.Cipher import AES
 import base64
 import codecs
 import os
+import json
 """
 获取歌曲地址：https://music.163.com/weapi/song/enhance/player/url?csrf_token=429d8812f4449bb9acb60e7647113999
 """
 
+
+def calcu(n):
+    m1 = n // 1 % 10
+    m2 = n // 10 % 10
+    m3 = n // 100 % 10
+    n = n - m1 * 1 - m2 * 10 - m3 * 100
+    n = n / 1000
+    s = n % 60
+    m = (n - s) / 60
+    return m, s
 
 class Spider(object):
     def __init__(self):
@@ -49,30 +61,60 @@ class Spider(object):
     def __print_info(self, songs):
         """打印歌曲需要下载的歌曲信息"""
         songs_list = []
+        song_json={
+             "ok":True,
+             "message":"提取数据",
+             "data": [],
+        }
+        # with open('song.json', 'w+') as json_file:
         for num, song in enumerate(songs):
-            print(num, '歌曲名字：', song['name'], '作者：', song['ar'][0]['name'])
+            song_dict=[]
+            # print("songs",song['dt'])
+            m,s = calcu(song['dt'])
+            print(num, '歌曲名字：', song['name'], '作者：', song['ar'][0]['name'],'专辑名: ',song['al']['name'],'时长: ',int(m),":",int(s))
+            if num <= 10:
+                song_dict.append(num)
+                song_dict.append(song['name'])
+                song_dict.append(song['ar'][0]['name'])
+                song_dict.append(song['al']['name'])
+                song_dict.append(int(m))
+                song_dict.append(int(s))
+                song_json['data'].append(song_dict)
             songs_list.append((song['name'], song['id']))
-        return songs_list
+        json_str = json.dumps(song_json, indent=4)
+        # json_file.write(json_str)
+        return json_str
 
-    def run(self):
-        while True:
-            name = input('请输入你需要下载的歌曲：')
-            songs = self.__get_songs(name)
-            if songs['songCount'] == 0:
-                print('没有搜到此歌曲，请换个关键字')
-            else:
-                songs = self.__print_info(songs['songs'])
-                num = input('请输入需要下载的歌曲，输入左边对应数字即可')
-                url = self.__get_mp3(songs[int(num)][1])
-                if not url:
-                    print('歌曲需要收费，下载失败')
-                else:
-                    filename = songs[int(num)][0]
-                    self.__download_mp3(url, filename)
-                flag = input('如需继续可以按任意键进行搜歌，否则按0结束程序')
-                if flag == '0':
-                    break
-        print('程序结束！')
+
+    def run(self,name):
+        songs = self.__get_songs(name)
+        if songs['songCount'] == 0:
+            print('没有搜到此歌曲，请换个关键字')
+        else:
+            songs = self.__print_info(songs['songs'])
+        # print(songs)
+        return songs
+        # print(self.__print_info(songs))
+        # return songs
+        # 阿贾克斯
+        # while True:
+        #   name = input('请输入你需要下载的歌曲：')
+        #   songs = self.__get_songs(name)
+        #   if songs['songCount'] == 0:
+        #       print('没有搜到此歌曲，请换个关键字')
+        #   else:
+        #       songs = self.__print_info(songs['songs'])
+        #       num = input('请输入需要下载的歌曲，输入左边对应数字即可')
+        #       url = self.__get_mp3(songs[int(num)][1])
+        #       if not url:
+        #           print('歌曲需要收费，下载失败')
+        #       else:
+        #           filename = songs[int(num)][0]
+        #           self.__download_mp3(url, filename)
+        #       flag = input('如需继续可以按任意键进行搜歌，否则按0结束程序')
+        #       if flag == '0': 
+        #           break
+        # print('程序结束！')
 
 
 class WangYiYun(object):
@@ -120,10 +162,10 @@ class WangYiYun(object):
         }
 
 
-def main():
-    spider = Spider()
-    spider.run()
+# def main():
+#     spider = Spider()
+#     spider.run("一万次悲伤")
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()

@@ -22,11 +22,10 @@
     <div id="overlay"></div>
 
     <div id="top">
-      <form class="filter-form" >
-        <input class="inputsearch"  name="" placeholder="Input Music Name" type="text">
-        
+      <form class="filter-form">
+        <input id="inputsearch" name="" placeholder="Input Music Name" type="text">
       </form>
-      <img class="search" src="../../packages/搜索.png" alt="搜索" height=30%>
+      <img id="search" src="../../packages/搜索.png" alt="搜索" height=30% onclick="get()">
     </div>
     <div id="title">
       <div class="titleName">
@@ -59,7 +58,23 @@
     }
   </script>
   <script src="./list.js"></script>
-
+  <script src="../analyse/js/jquery.min.js"></script>
+  <script type="text/javascript">
+    function get(){
+      var myinput = jQuery("#inputsearch").val();
+      $.ajax({
+        type="GET",
+        data:myinput,
+        url:'../model/music_download.py',
+        success:function(data){
+          alert("ok");
+      },
+      error:function(e){
+        alert("error");
+      }
+      })
+    }
+  </script>
 </body>
 
 </html>
