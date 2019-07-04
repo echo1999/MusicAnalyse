@@ -17,11 +17,11 @@
     // of different video formats to add
     src: [
       {
-        src: '../../packages/indexBackground.mp4',
+        src: 'https://cdn.bigc.cc/blue_tide/video/indexBackground.mp4',
         type: 'video/mp4'
       },
       {
-        src: '../../packages/indexBackground/indexBackground.webm',
+        src: 'https://cdn.bigc.cc/blue_tide/video/indexBackground.webm',
         type: 'video/webm;codecs="vp8, vorbis"'
       }
     ],
