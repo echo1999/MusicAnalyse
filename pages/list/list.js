@@ -101,7 +101,7 @@ let res = {
 //   }
 // }
 if (res.ok) {
-  let html = ''
+  let html2 = ''
   for (let i = 0; i < res.data.length; i++) {
     const e = res.data[i]
     const name = e[1]
@@ -111,13 +111,16 @@ if (res.ok) {
     const min = e[4]
     const second = e[5]
     const time = e[4] + ":" + e[5]
-    console.log('🐸', name, singer, album, time)
-    html += `<div class="item">
+    // console.log('🐸', name, singer, album, time)
+    // html1 = `<div class="item">34234</div>`
+    html2 += `<div class="item">
   <div class ="name"> ${name}</div>
   <div class ="singer">${singer}</div>
   <div class ="album">${album}</div>
   <div class ="time">${time}</div>
   </div>`
   }
-  document.querySelector('#list').innerHTML = html
+  // document.querySelector('#list').innerHTML = html1
+  document.querySelector('#list').innerHTML = html2
+  // document.querySelector('#list').innerHTML = html
 }

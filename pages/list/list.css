@@ -87,11 +87,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+
 }
 
 input {
   border: 0;
-  height: 100%;
+  /* height: 80%; */
   background-image: none;
   background-color: transparent;
   box-shadow: none;
@@ -100,7 +102,11 @@ input {
   color: #fff;
   transition: all 0.5s ease-in;
   outline: 0;
+
 }
+/* .search{
+  
+} */
 
 .search-section .filter-form .btn-search svg {
   width: 20px;
@@ -115,13 +121,15 @@ input {
   background-image: none;
   background-color: transparent;
   box-shadow: none;
-  margin: 0 auto;
+  margin: 10px;
   max-width: 350px;
   padding-left: 20px;
   font-size: 1.4rem;
   color: #fff;
   transition: all 0.5s ease-in;
   text-align: left;
+  width:70%;
+  right:0;
   /* position: relative; */
 }
 
@@ -129,14 +137,43 @@ input::-webkit-input-placeholder {
   color: #ffffff;
 }
 
+#title {
+  z-index: 2;
+  width: 87%;
+  height: 8%;
+  background-color: white;
+  position: relative;
+  margin: 0 auto;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  /* border-radius: 10px; */
+}
+
+#title p1 {
+  display: block;
+  padding-top: 10px;
+  margin-left: 18px;
+  margin-right: 10px;
+  margin-bottom: 25px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#title p {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 #main {
   z-index: 2;
   width: 87%;
-  height: 447px;
+  height: 408px;
   background-color: rgba(255, 255, 255, 0.7);
   position: relative;
   margin: 0 auto;
-  border-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
   overflow: hidden;
 }
 
@@ -151,6 +188,7 @@ input::-webkit-input-placeholder {
   background: rgba(241, 241, 241);
 }
 
+.titleName,
 .name {
   position: absolute;
   /* left:50px; */
@@ -158,31 +196,34 @@ input::-webkit-input-placeholder {
   overflow: hidden;
   text-overflow: ellipsis;
   display: inline-block;
-  width: 450px;
+  width: 500px;
 }
 
+.titleSinger,
 .singer {
   position: absolute;
   width: 200px;
-  left: 450px;
+  left: 500px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   display: inline-block;
 }
 
+.titleAlbum,
 .album {
   position: absolute;
-  left: 650px;
-  width: 400px;
+  left: 700px;
+  width: 360px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   display: inline-block;
 }
 
-1 .time {
+.titleTime,
+.time {
   position: absolute;
-  left: 1050px;
-  width: 50;
+  left: 1060px;
+  width: 20;
 }
