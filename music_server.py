@@ -1,5 +1,5 @@
 import json
-from model.music_download import (
+from model.music_downloadv2 import (
   Spider,
   WangYiYun,
 )
@@ -15,10 +15,6 @@ from flask import (
 # 先要初始化一个 Flask 实例
 # app = Flask(__name__, static_folder='views/statics')
 app = Flask(__name__, static_url_path='')
-# host www.qq.com
-# router /list.music
-# query ?a=123 
-# T T疯狂试探失败
 @app.route('/', methods=['GET'])
 def index():
     return render_template("index.html")

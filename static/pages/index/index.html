@@ -1,4 +1,5 @@
 <!doctype html>
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -7,8 +8,23 @@
   <!-- <meta name="description" content="Super easy to implement HTML5 fullscreen background video library in JavaScript."> -->
   <link rel="stylesheet" href="index.css" type="text/css">
   <!-- <script src="https://use.typekit.net/nlq1kdt.js"></script> -->
-  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  <script>
+    try {
+      Typekit.load({
+        async: true
+      });
+    } catch (e) {}
+  </script>
+  <style>
+    #main_content {
+      z-index: 2;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  </style>
 </head>
+
 <body>
   <div id="container">
     <video id="background_video" loop muted></video>
@@ -20,8 +36,9 @@
         <h1>开启音乐分析之行</h1><br>
         <form class="filter-form" data-v-8eed340e="">
           <input class="inputsearch" data-v-8eed340e="" name="" placeholder="Input Music Name" type="text">
-      </form>
-        
+          <img id="search" src="../../packages/搜索.png" alt="搜索">
+        </form>
+
       </div>
 
       <div id="links">
@@ -38,5 +55,16 @@
       window.location.protocol = "https";
     }
   </script>
+  <script src="../../packages/bigsea.js"></script>
+  <script src="../analyse/js/jquery.min.js"></script>
+  <script type="text/javascript">
+    Sea('#search').on('click', function () {
+      let v = Sea('.inputsearch').val()
+      if (v) {
+        window.location.href = '/pages/list/list.html?search=' + v
+      }
+    })
+  </script>
 </body>
+
 </html>

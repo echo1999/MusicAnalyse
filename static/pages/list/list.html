@@ -86,7 +86,7 @@
             const second = e[5]
             const time = e[4] + ":" + e[5]
             // console.log('🐸', name, singer,album, time) // html1=`<div class="item">34234</div>`
-            html2 += `<div class="item">
+            html2 += `<div class="item" data-key=${i}>
             <div class="name"> ${name}</div>
             <div class="singer">${singer}</div>
             <div class="album">${album}</div>
@@ -99,6 +99,20 @@
         }
       })
     })
+    // document.getElementById('#list').addEventListener('click',function(e){
+    //   var value = e.target.attributes['data-key'].value
+    //   console.log('🐸', value)
+    // })
+     Sea('#list').on('click', '.item', function(event) {
+      console.log('🐸', event.target.dataset.key)
+    })
+    // 取参数
+    let o = Sea.query(window.location.search)
+    // 传入 input 因为 url 不能带中文 所以要解析一下
+    let v = decodeURIComponent(o.search)
+    Sea('#inputsearch').val(v)
+    Sea('#search').click()
+
   </script>
 </body>
 
