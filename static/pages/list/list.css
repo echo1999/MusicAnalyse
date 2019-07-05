@@ -225,3 +225,7 @@ input::-webkit-input-placeholder {
   left: 1060px;
   width: 20;
 }
+
+.name,.singer,.album,.time{
+  pointer-events: none;
+}

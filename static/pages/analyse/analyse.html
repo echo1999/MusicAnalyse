@@ -27,55 +27,11 @@
     </section> -->
     <div id="main_content">
       <div id="main_content_left">
-        <pre>
+        <!-- <pre>
+          <h1 class="songTitle"></h1>
       <h1>一万次悲伤</h1>
-Oh honey
-我脑海里全都是你
-oh 无法抗拒的心悸
-难以呼吸
-tonight
-是否又要错过一个夜晚
-是否还要掩饰最后的期待
-oh tonight
-一万次悲伤
-依然会有dream
-我一直在最温暖的地方等你
-似乎只能这样 停留一个方向
-已不能改变
-每一颗眼泪 是一万道光
-最昏暗的地方也变得明亮
-我奔涌的暖流 寻找你的海洋
-我注定这样
-oh honey
-你目光里充满忧郁
-就像经历一片废墟 难以逃避
-tonight
-是否还要错过这个夜晚
-是否还要熄灭所有的期待
-oh tonight
-一万次悲伤
-依然会有dream
-我一直在最后的地方等你
-似乎只能这样 停留一个方向
-已不能改变
-每一颗眼泪 是一万道光
-最昏暗的地方也变得明亮
-我奔涌的暖流 寻找你的海洋
-我注定这样
-一万次悲伤
-依然会有dream
-我一直在最后的地方等你
-似乎只能这样 停留一个方向
-已不能改变
-每一颗眼泪 是一万道光
-最昏暗的地方也变得明亮
-我奔涌的暖流 寻找你的海洋
-我注定这样
-oh honey
-我脑海里全都是你
-oh 无法抗拒的心悸
-难以呼吸
-      </pre>
+
+      </pre> -->
       </div>
       <div id="main_content_right">
         <div id="main_content_right_top">
@@ -139,22 +95,47 @@ oh 无法抗拒的心悸
   </script>
   <script type="text/javascript" src="./js/jquery.min.js"></script>
   <script type="text/javascript" src="./js/audio.js"></script>
+  <script src="../../packages/bigsea.js"></script>
   <script type="text/javascript">
     $(function () {
 
       var song = [{
-          // 'cover': 'images/cover2.jpg',
-          'src': 'http://music.163.com/song/media/outer/url?id=476592630.mp3',
-          // 'src': './music/bg.mp3',
-          'title': 'Memories'
-        },
-      ];
+        // 'cover': 'images/cover2.jpg',
+        'src': 'http://music.163.com/song/media/outer/url?id=476592630.mp3',
+        // 'src': './music/bg.mp3',
+        'title': 'Memories'
+      }, ];
 
       var audioFn = audioPlay({
         song: song,
         autoPlay: false //是否立即播放第一首，autoPlay为true且song为空，会alert文本提示并退出
       });
     });
+  </script>
+  <script type="text/javascript">
+    // 取参数
+    let o = Sea.query(window.location.songnum)
+    // 传入 input 因为 url 不能带中文 所以要解析一下
+    // let v = decodeURIComponent(o.songID)
+    Sea.Ajax({
+      url: '/analyse.lyric',
+      data: {
+        songnum: o.songnum
+      }
+    }).then(res => {
+      // console.log('🐸', res)
+      if (res) {
+        let html = ''
+        const lyric = res
+        html += `<pre>${lyric}</pre>`
+      }
+      // document.querySelector('#list').innerHTML = html1
+      document.querySelector('#main_content_left').innerHTML = html
+      // document.querySelector('#list').innerHTML = html
+    })
+
+    // Sea('#inputsearch').val(v)
+    // Sea('#search').click()
   </script>
 </body>
 

@@ -75,7 +75,7 @@
       }).then(res => {
         // console.log('🐸', res)
         if (res.ok) {
-          let html2 = ''
+          let html = ''
           for (let i = 0; i < res.data.length; i++) {
             const e = res.data[i]
             const name = e[1]
@@ -86,7 +86,7 @@
             const second = e[5]
             const time = e[4] + ":" + e[5]
             // console.log('🐸', name, singer,album, time) // html1=`<div class="item">34234</div>`
-            html2 += `<div class="item" data-key=${i}>
+            html += `<div class="item" data-key=${i}>
             <div class="name"> ${name}</div>
             <div class="singer">${singer}</div>
             <div class="album">${album}</div>
@@ -94,17 +94,16 @@
           </div>`
           }
           // document.querySelector('#list').innerHTML = html1
-          document.querySelector('#list').innerHTML = html2
+          document.querySelector('#list').innerHTML = html
           // document.querySelector('#list').innerHTML = html
         }
       })
     })
-    // document.getElementById('#list').addEventListener('click',function(e){
-    //   var value = e.target.attributes['data-key'].value
-    //   console.log('🐸', value)
-    // })
-     Sea('#list').on('click', '.item', function(event) {
-      console.log('🐸', event.target.dataset.key)
+
+    Sea('#list').on('click', '.item', function (event) {
+      let num = event.target.dataset.key 
+      // console.log('🐸', num)
+      window.location.href = '/pages/analyse/analyse.html?songnum=' + num
     })
     // 取参数
     let o = Sea.query(window.location.search)
@@ -112,7 +111,6 @@
     let v = decodeURIComponent(o.search)
     Sea('#inputsearch').val(v)
     Sea('#search').click()
-
   </script>
 </body>
 

@@ -92,30 +92,30 @@ class Spider(object):
              "message":"提取数据",
              "data": [],
         }
-        # with open('song.json', 'w+') as json_file:
-        for num, song in enumerate(songs):
-            if num <= 10:
-                song_dict=[]
-                m,s = calcu(song['dt'])
-                lric = self.__download_lyric_by_musicId(song['id'])
-                mp3 = self.__download_url_by_musicId(song['id'])
-                # print(num, '歌曲名字：', song['name'], '作者：', song['ar'][0]['name'],'专辑名: ',song['al']['name'],'时长: ',int(m),":",int(s))
-                # if num <= 10:
-                song_dict.append(num)   #歌曲序号
-                song_dict.append(song['name'])     #歌曲名称
-                #song_dict.append(song['id'])       #歌曲id
-                song_dict.append(song['ar'][0]['name'])  #歌手名称
-                song_dict.append(song['al']['name'])     #专辑名称
-                song_dict.append(int(m))               #歌曲时长
-                song_dict.append(int(s))
-                song_dict.append(lric)  # 歌词
-                song_dict.append(mp3)  # mp3播放地址
-                song_json['data'].append(song_dict)
-            songs_list.append((song['name'], song['id']))
-        json_str = json.dumps(song_json, indent=4)
-        # print(json_str)
-        # json_file.write(json_str)
-        return json_str
+        with open('song.json', 'w+') as json_file:
+            for num, song in enumerate(songs):
+                if num <= 10:
+                    song_dict=[]
+                    m,s = calcu(song['dt'])
+                    lric = self.__download_lyric_by_musicId(song['id'])
+                    mp3 = self.__download_url_by_musicId(song['id'])
+                    # print(num, '歌曲名字：', song['name'], '作者：', song['ar'][0]['name'],'专辑名: ',song['al']['name'],'时长: ',int(m),":",int(s))
+                    # if num <= 10:
+                    song_dict.append(num)   #歌曲序号
+                    song_dict.append(song['name'])     #歌曲名称
+                    song_dict.append(song['ar'][0]['name'])  #歌手名称
+                    song_dict.append(song['al']['name'])     #专辑名称
+                    song_dict.append(int(m))               #歌曲时长
+                    song_dict.append(int(s))
+                    song_dict.append(lric)  # 歌词
+                    song_dict.append(mp3)  # mp3播放地址
+                    song_dict.append(song['id'])  # 歌曲id
+                    song_json['data'].append(song_dict)
+                songs_list.append((song['name'], song['id']))
+            json_str = json.dumps(song_json, indent=4)
+            # print(json_str)
+            json_file.write(json_str)
+            return json_str
 
     #下载mp3到本地
     def __download_music(self,id):
