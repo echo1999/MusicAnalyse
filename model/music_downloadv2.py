@@ -52,25 +52,25 @@ class Spider(object):
         response = requests.post(url, data=data, headers=self.headers).json()
         return response['data'][0]['url']
 
-    # def __download_mp3(self, url, filename):
-    #     """下载mp3"""
-    #     abspath = os.path.abspath('.')  # 获取绝对路径
-    #     os.chdir(abspath)
-    #     response = requests.get(url, headers=self.headers).content
-    #     path = os.path.join(abspath, filename)
-    #     with open(filename + '.mp3', 'wb') as f:
-    #         f.write(response)
-    #         print('下载完毕,可以在%s   路径下查看' % path + '.mp3')
-
-    def __download_mp3(self, url):
+    def __download_mp3(self, url, filename):
         """下载mp3"""
         abspath = os.path.abspath('.')  # 获取绝对路径
         os.chdir(abspath)
         response = requests.get(url, headers=self.headers).content
-        path = os.path.join(abspath)
-        with open('download.mp3', 'wb') as f:
+        path = os.path.join(abspath, filename)
+        with open(filename + '.mp3', 'wb') as f:
             f.write(response)
             print('下载完毕,可以在%s   路径下查看' % path + '.mp3')
+
+    # def __download_mp3(self, url):
+    #     """下载mp3"""
+    #     abspath = os.path.abspath('.')  # 获取绝对路径
+    #     os.chdir(abspath)
+    #     response = requests.get(url, headers=self.headers).content
+    #     path = os.path.join(abspath)
+    #     with open('download.mp3', 'wb') as f:
+    #         f.write(response)
+    #         print('下载完毕,可以在%s   路径下查看' % path + '.mp3')
     #获得歌词
     def __download_lyric_by_musicId(self,music_id):
         url = "http://music.163.com/api/song/lyric?" +"id=" + str(music_id) + "&lv=1&kv=1&tv=-1"

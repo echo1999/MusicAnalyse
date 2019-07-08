@@ -96,8 +96,8 @@ def getMelPic(export_path, mfccPic_path):
             print("这不是一个wav文件")
 
 def figurePicData():
-    unprocessed_file = "G:/huawei/MUsicEmotionFilter/happy"#待处理音频文件所在目录
-    transedToWav = "G:/huawei/MUsicEmotionFilter/example_wav/"#格式转换完毕后存放地址
-    mfccPic_path = "G:/huawei/MUsicEmotionFilter/train_set/happy"#存放wav格式文件转换mel频谱图的目录
+    unprocessed_file = "../myData/MUsicEmotionFilter/happy"  # 待处理音频文件所在目录
+    transedToWav = "../myData/MUsicEmotionFilter/example_wav/"  # 格式转换完毕后存放地址
+    mfccPic_path = "../myData/MUsicEmotionFilter/train_set/happy"  # 存放wav格式文件转换mel频谱图的目录
     transFormat(unprocessed_file, transedToWav)
     getMelPic(transedToWav, mfccPic_path)

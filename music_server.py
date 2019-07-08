@@ -39,22 +39,22 @@ def search():
     # return songs
 
 
-# @app.route('/list.download', methods=['GET'])
-# def download():
-#     # print(request.args)
-#     spider = Spider()
-#     # songs = spider.run(request.args['search'])
-#     download = spider.__download_music(request.args['songID'])
-#     # with open('./song.json', encoding='utf-8') as f:
-#     #     temp = json.loads(f.read())
-#     #     # print(type(temp))
-#     #     # print(temp)
-#     # songs = json.dumps(temp)
-#     return songs
-
-
 @app.route('/analyse.lyric', methods=['GET'])
 def lyric():
+    spider = Spider()
+    with open('./song.json', encoding='utf-8') as f:
+        temp = json.loads(f.read())
+        # print(type(temp))
+        # print(temp)
+    songs = json.dumps(temp)
+    # url = 
+    url = spider.__get_mp3(songs[int(request.args['songnum'])][7])
+    if not url:
+        print('歌曲需要收费，下载失败')
+    else:
+        filename = songs[int(request.args['songnum'])][1]
+        spider.__download_mp3(url, filename)
+
     with open('./song.json', encoding='utf-8') as f:
         temp = json.loads(f.read())
     
@@ -66,8 +66,7 @@ def lyric():
                 myjson = json.dumps(mylist)
                 # myjson = fp.json.dump(mylist)
                 return myjson
-
-
+                
 
 
 
