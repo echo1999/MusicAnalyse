@@ -52,25 +52,25 @@ class Spider(object):
         response = requests.post(url, data=data, headers=self.headers).json()
         return response['data'][0]['url']
 
-    def __download_mp3(self, url, filename):
-        """下载mp3"""
-        abspath = os.path.abspath('.')  # 获取绝对路径
-        os.chdir(abspath)
-        response = requests.get(url, headers=self.headers).content
-        path = os.path.join(abspath, filename)
-        with open(filename + '.mp3', 'wb') as f:
-            f.write(response)
-            print('下载完毕,可以在%s   路径下查看' % path + '.mp3')
-
-    # def __download_mp3(self, url):
+    # def __download_mp3(self, url, filename):
     #     """下载mp3"""
     #     abspath = os.path.abspath('.')  # 获取绝对路径
     #     os.chdir(abspath)
     #     response = requests.get(url, headers=self.headers).content
-    #     path = os.path.join(abspath)
-    #     with open('download.mp3', 'wb') as f:
+    #     path = os.path.join(abspath, filename)
+    #     with open(filename + '.mp3', 'wb') as f:
     #         f.write(response)
     #         print('下载完毕,可以在%s   路径下查看' % path + '.mp3')
+
+    def __download_mp3(self, url):
+        """下载mp3"""
+        abspath = os.path.abspath('.')  # 获取绝对路径
+        os.chdir(abspath)
+        response = requests.get(url, headers=self.headers).content
+        path = os.path.join(abspath)
+        with open('download.mp3', 'wb') as f:
+            f.write(response)
+            print('下载完毕,可以在%s   路径下查看' % path + '.mp3')
     #获得歌词
     def __download_lyric_by_musicId(self,music_id):
         url = "http://music.163.com/api/song/lyric?" +"id=" + str(music_id) + "&lv=1&kv=1&tv=-1"
@@ -92,31 +92,55 @@ class Spider(object):
              "message":"提取数据",
              "data": [],
         }
-        with open('song.json', 'w+') as json_file:
-            for num, song in enumerate(songs):
-                if num <= 10:
-                    song_dict=[]
-                    m,s = calcu(song['dt'])
-                    lric = self.__download_lyric_by_musicId(song['id'])
-                    mp3 = self.__download_url_by_musicId(song['id'])
-                    # print(num, '歌曲名字：', song['name'], '作者：', song['ar'][0]['name'],'专辑名: ',song['al']['name'],'时长: ',int(m),":",int(s))
-                    # if num <= 10:
-                    song_dict.append(num)   #歌曲序号
-                    song_dict.append(song['name'])     #歌曲名称
-                    song_dict.append(song['ar'][0]['name'])  #歌手名称
-                    song_dict.append(song['al']['name'])     #专辑名称
-                    song_dict.append(int(m))               #歌曲时长
-                    song_dict.append(int(s))
-                    song_dict.append(lric)  # 歌词
-                    song_dict.append(mp3)  # mp3播放地址
-                    song_dict.append(song['id'])  # 歌曲id
-                    song_json['data'].append(song_dict)
-                songs_list.append((song['name'], song['id']))
-            json_str = json.dumps(song_json, indent=4)
-            # print(json_str)
-            json_file.write(json_str)
-            return json_str
+        # with open('song.json', 'w+') as json_file:
+        #     for num, song in enumerate(songs):
+        #         if num <= 10:
+        #             song_dict=[]
+        #             m,s = calcu(song['dt'])
+        #             lric = self.__download_lyric_by_musicId(song['id'])
+        #             mp3 = self.__download_url_by_musicId(song['id'])
+        #             # print(num, '歌曲名字：', song['name'], '作者：', song['ar'][0]['name'],'专辑名: ',song['al']['name'],'时长: ',int(m),":",int(s))
+        #             # if num <= 10:
+        #             song_dict.append(num)   #歌曲序号
+        #             song_dict.append(song['name'])     #歌曲名称
+        #             song_dict.append(song['ar'][0]['name'])  #歌手名称
+        #             song_dict.append(song['al']['name'])     #专辑名称
+        #             song_dict.append(int(m))               #歌曲时长
+        #             song_dict.append(int(s))
+        #             song_dict.append(lric)  # 歌词
+        #             song_dict.append(mp3)  # mp3播放地址
+        #             song_dict.append(song['id'])  # 歌曲id
+        #             song_json['data'].append(song_dict)
+        #         songs_list.append((song['name'], song['id']))
+        #     json_str = json.dumps(song_json, indent=4)
+        #     # print(json_str)
+        #     json_file.write(json_str)
+        #     return json_str
 
+        for num, song in enumerate(songs):
+            if num <= 10:
+                song_dict = []
+                m, s = calcu(song['dt'])
+                lric = self.__download_lyric_by_musicId(song['id'])
+                mp3 = self.__download_url_by_musicId(song['id'])
+                # print(num, '歌曲名字：', song['name'], '作者：', song['ar'][0]['name'],'专辑名: ',song['al']['name'],'时长: ',int(m),":",int(s))
+                # if num <= 10:
+                song_dict.append(num)   #歌曲序号
+                song_dict.append(song['name'])     #歌曲名称
+                song_dict.append(song['ar'][0]['name'])  #歌手名称
+                song_dict.append(song['al']['name'])     #专辑名称
+                song_dict.append(int(m))               #歌曲时长
+                song_dict.append(int(s))
+                song_dict.append(lric)  # 歌词
+                song_dict.append(mp3)  # mp3播放地址
+                song_dict.append(song['id'])  # 歌曲id
+                song_json['data'].append(song_dict)
+            songs_list.append((song['name'], song['id']))
+        json_str = json.dumps(song_json, indent=4)
+        # print(json_str)
+        # json_file.write(json_str)
+        print("json_str:",type(json_str))
+        return json_str
     #下载mp3到本地
     def __download_music(self,id):
         url = self.__get_mp3(id)
@@ -133,6 +157,7 @@ class Spider(object):
             print('没有搜到此歌曲，请换个关键字')
         else:
             songs = self.__print_info(songs['songs'])
+            print(type(songs))
             print(songs)
         return songs
             #num = input('请输入需要下载的歌曲，输入左边对应数字即可')
@@ -235,10 +260,10 @@ class WangYiYun(object):
         }
 
 
-def main():
-    spider = Spider()
-    spider.run("一万次悲伤")
+# def main():
+#     spider = Spider()
+#     spider.run("一万次悲伤")
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()

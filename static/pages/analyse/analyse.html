@@ -117,9 +117,11 @@
     Sea.Ajax({
       url: '/analyse.lyric',
       data: {
-        songnum: o.songnum
+        songName:o.songName,
+        songNum: o.songNum
       }
     }).then(res => {
+      console.log('🐸', res)
       let html = ''
       if (res) {
         let html = ''

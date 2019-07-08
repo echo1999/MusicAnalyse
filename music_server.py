@@ -28,13 +28,13 @@ def index():
 @app.route('/list.search', methods=['GET'])
 def search():
     # print(request.args)
-    # spider = Spider()
-    # songs = spider.run(request.args['search'])
-    with open('./song.json', encoding='utf-8') as f:
-        temp = json.loads(f.read())
+    spider = Spider()
+    songs = spider.run(request.args['search'])
+    # with open('./song.json', encoding='utf-8') as f:
+    #     temp = json.loads(f.read())
         # print(type(temp))
         # print(temp)
-    songs = json.dumps(temp)
+    # songs = json.dumps(temp)
     return songs
     # return songs
 
@@ -42,30 +42,20 @@ def search():
 @app.route('/analyse.lyric', methods=['GET'])
 def lyric():
     spider = Spider()
-    with open('./song.json', encoding='utf-8') as f:
-        temp = json.loads(f.read())
-        # print(type(temp))
-        # print(temp)
-    songs = json.dumps(temp)
-    # url = 
-    url = spider.__get_mp3(songs[int(request.args['songnum'])][7])
-    if not url:
-        print('歌曲需要收费，下载失败')
-    else:
-        filename = songs[int(request.args['songnum'])][1]
-        spider.__download_mp3(url, filename)
-
-    with open('./song.json', encoding='utf-8') as f:
-        temp = json.loads(f.read())
-    
-    for i in temp['data']:
-        for j in i:
-            if int(request.args['songnum']) == i[j]:
-                # return i[6]
-                mylist = (i[1],i[6],i[7])
-                myjson = json.dumps(mylist)
-                # myjson = fp.json.dump(mylist)
-                return myjson
+    songs = spider.run(request.args['songName'])
+    songs = json.loads(songs)
+    print("songsType:",type(songs))
+    print("songs['data']:",songs['data'])
+    for i in songs['data']:
+        print(i)
+        if int(request.args['songNum']) == i[0]:
+            print(i[8])
+            spider.__download_music(int(i[8]))
+            # return i[6]
+            mylist = (i[1],i[6],i[7])
+            myjson = json.dumps(mylist)
+            # myjson = fp.json.dump(mylist)
+            return myjson
                 
 
 

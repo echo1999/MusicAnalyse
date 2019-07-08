@@ -101,10 +101,12 @@
     })
 
     Sea('#list').on('click', '.item', function (event) {
+
       let num = event.target.dataset.key 
+      let name =  Sea('#inputsearch').val()
       if(num >= 0){
         // window.open = '/pages/analyse/analyse.html?songnum=' + num
-        window.location.href = '/pages/analyse/analyse.html?songnum=' + num 
+        window.location.href = '/pages/analyse/analyse.html?songName=' + name +'&songNum='+num
       }
       // console.log('🐸', num)
     })
