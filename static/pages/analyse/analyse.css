@@ -107,7 +107,9 @@
       overflow-y: auto;
       display: block;
     }
-
+    #main_content_left h1{
+      color : #fff;
+    }
     #main_content_right {
       width: 60%;
       position: absolute;

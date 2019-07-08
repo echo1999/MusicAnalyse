@@ -1,4 +1,5 @@
 import json
+import numpy as np
 from model.music_downloadv2 import (
   Spider,
   WangYiYun,
@@ -56,31 +57,19 @@ def search():
 def lyric():
     with open('./song.json', encoding='utf-8') as f:
         temp = json.loads(f.read())
-        # print(type(temp))
-        # print(temp)
-    # songs = json.dumps(temp)
-    # download = spider.__download_music(request.args['songID'])
-    # print("songs Type",type(temp))
-    # print(temp)
-    # print("songs.data",songs.data[0])
-    # print("temp['data] Type",type(temp['data']))
-    print(temp['data'])
+    
     for i in temp['data']:
-        # print(type(i))
-        # print("i",i)
-        # print(i[0])
         for j in i:
-            if request.args['songnum'] == i[j]:
-                return 
-        # e = temp['data'][i]
-    #     print(e)
-    #     # if request.args['songnum'] == e[0]:
-    #     #     return e[6]
-    #     pass
-    # return songs
-    # b=for e in temp['data'] for i in e
-    # b[0]
-    # b[0+j+5]
+            if int(request.args['songnum']) == i[j]:
+                # return i[6]
+                mylist = (i[1],i[6],i[7])
+                myjson = json.dumps(mylist)
+                # myjson = fp.json.dump(mylist)
+                return myjson
+
+
+
+
 
 
 # 运行服务器

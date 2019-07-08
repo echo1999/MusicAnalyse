@@ -102,8 +102,11 @@
 
     Sea('#list').on('click', '.item', function (event) {
       let num = event.target.dataset.key 
+      if(num >= 0){
+        // window.open = '/pages/analyse/analyse.html?songnum=' + num
+        window.location.href = '/pages/analyse/analyse.html?songnum=' + num 
+      }
       // console.log('🐸', num)
-      window.location.href = '/pages/analyse/analyse.html?songnum=' + num
     })
     // 取参数
     let o = Sea.query(window.location.search)
