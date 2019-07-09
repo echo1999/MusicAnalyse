@@ -11,7 +11,7 @@
       Typekit.load({
         async: true
       });
-    } catch (e) {}
+    } catch (e) { }
   </script>
   <style>
     #search {
@@ -101,13 +101,25 @@
 
     Sea('#list').on('click', '.item', function (event) {
 
-      let num = event.target.dataset.key 
-      let name =  Sea('#inputsearch').val()
-      if(num >= 0){
-        // window.open = '/pages/analyse/analyse.html?songnum=' + num
-        window.location.href = '/pages/analyse/analyse.html?songName=' + name +'&songNum='+num
+      let num = event.target.dataset.key
+      let name = Sea('#inputsearch').val()
+      if (num >= 0) {
+        // let o = Sea.query(window.location.search)
+        Sea.Ajax({
+          url: '/list.isFree',
+          data: {
+            songName: name,
+            songNum: num
+          }
+        }).then(res => {
+          // console.log('🐸', res)
+          if (res == "isFree") {
+            window.location.href = '/pages/analyse/analyse.html?songName=' + name + '&songNum=' + num
+          } else {
+            alert("歌曲需要收费，无法解析，请换一首歌")
+          }
+        })
       }
-      // console.log('🐸', num)
     })
     // 取参数
     let o = Sea.query(window.location.search)

@@ -68,7 +68,7 @@ class Spider(object):
         # downloadPath = abspath+"/myData/MusicDownload"
         # shutil.copyfile(abspath, dstfile)
         downloadPath = abspath
-        print("downloadPath:",downloadPath)
+        # print("downloadPath:",downloadPath)
         os.chdir(downloadPath)
         response = requests.get(url, headers=self.headers).content
         path = os.path.join(downloadPath)
@@ -154,6 +154,7 @@ class Spider(object):
         url = self.__get_mp3(id)
         if not url:
             print('歌曲需要收费，下载失败')
+            return "notFree"
         else:
             self.__download_mp3(url)
 

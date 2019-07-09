@@ -7,23 +7,19 @@ import librosa.display
 import numpy as np
 import matplotlib.pyplot as plt
 from pydub import AudioSegment
-import shutil
-
 
 def transFormat(import_path, export_path):
-
+    print("import_path:", import_path)
     dirs = os.listdir(import_path)
-    
+
     i = 0
     for file in dirs:
-        # print(file)
         if re.match('.*.mp3', file):
-            source_file = import_path+ "/" +file
+            source_file = import_path + "/" + file
             splited_name = file.split(".")
             # print(splited_name)
-            processed_file = export_path+ str(i) +".wav"
+            processed_file = export_path + str(i) + ".wav"
             i += 1
-            print(file)
 
             try:
                 cutted_wav = AudioSegment.from_mp3(source_file)
@@ -31,26 +27,30 @@ def transFormat(import_path, export_path):
             except:
                 print('MP3文件有问题')
                 continue
-            
+
             # cutted_wav = AudioSegment.from_wav(processed_file)
             cutted_wav = cutted_wav[25*1000:]
             wav_len = len(cutted_wav)
             cutted_wav = cutted_wav[: wav_len-25*1000]
             # 取中间截取后的前40秒
             wav_len = wav_len/2
+            # print(wav_len)
             if wav_len <= 39*1000:
                 continue
             else:
+                # print('到这里了没啊')
                 cutted_wav = cutted_wav[wav_len - 41*1000:wav_len-1]
-            
+
             wav_len = len(cutted_wav)
-            
+            # print('到这里了没', len(cutted_wav))  # 没到
             if len(cutted_wav) == 40999:
                 cutted_wav.export(processed_file, format="wav")
             else:
                 continue
 
+
 def getMelPic(export_path, mfccPic_path):
+    print("export_path:", export_path)
     # import_path = "G:/huawei/MUsicEmotionFilter/example"
     # import_path = "G:/huawei/MUsicEmotionFilter/happy_wav"
     dirs = os.listdir(export_path)
@@ -97,17 +97,14 @@ def getMelPic(export_path, mfccPic_path):
         else:
             print("这不是一个wav文件")
 
+
 # def figurePicData():
-#     unprocessed_file = "C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/MusicDownload"  # 待处理音频文件所在目录
-#     transedToWav = "C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/wav/"  # 格式转换完毕后存放地址
-#     mfccPic_path = "C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/picture"  # 存放wav格式文件转换mel频谱图的目录
+#     unprocessed_file = "C:/Users/echo1999/Documents/Github/MusicAnalyse/static/myData/musicDownload"  # 待处理音频文件所在目录
+#     transedToWav = "C:/Users/echo1999/Documents/Github/MusicAnalyse/static/myData/wav/"  # 格式转换完毕后存放地址
+#     # 存放wav格式文件转换mel频谱图的目录
+#     mfccPic_path = "C:/Users/echo1999/Documents/Github/MusicAnalyse/static/myData/picture"
 #     transFormat(unprocessed_file, transedToWav)
 #     getMelPic(transedToWav, mfccPic_path)
-#     if os.listdir('C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/wav') != []:
-#         os.remove('C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/wav/0.wav')
-#     if os.listdir('C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/MusicDownload') != []:
-#         os.remove('C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/MusicDownload/download.mp3')
-    # os.remove(
-    #         '../myData/wav/0.wav')
+
 
 # figurePicData()

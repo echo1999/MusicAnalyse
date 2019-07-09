@@ -12,7 +12,7 @@
       Typekit.load({
         async: true
       });
-    } catch (e) {}
+    } catch (e) { }
   </script>
 </head>
 
@@ -112,14 +112,14 @@
           songNum: o.songNum
         }
       }).then(res => {
-        console.log('🐸', res)
+        // console.log('🐸', res)
         let html = ''
         if (res) {
           let html = ''
           const songName = res[0]
           const lyric = res[1]
           const songRef = res[2]
-          console.log('🐸', songRef)
+          // console.log('🐸', songRef)
           html += `
         <h1>${songName}</h1>
         <pre>${lyric}</pre>`
@@ -127,27 +127,20 @@
           var song = [{
             'src': songRef,
             'title': songName
-          }, ];
+          },];
 
           var audioFn = audioPlay({
             song: song,
             autoPlay: false //是否立即播放第一首，autoPlay为true且song为空，会alert文本提示并退出
           });
         }
-        var song = [{
-          'src': songRef,
-          'title': songName
-        }, ];
+        console.log('🐸', "跑到这儿了")
+        return Sea.Ajax({
+          url: '/analyse.tune',
+          data: {
 
-        var audioFn = audioPlay({
-          song: song,
-          autoPlay: false //是否立即播放第一首，autoPlay为true且song为空，会alert文本提示并退出
-        });
-      });
-
-      Sea.Ajax({
-        url: '/analyse.tune',
-        data: {}
+          }
+        })
       }).then(res => {
         // console.log('🐸', res)
         let html = ''
@@ -162,12 +155,13 @@
       });
 
 
+
       // Sea('#inputsearch').val(v)
       // Sea('#search').click() good
     </script>
     <script type="text/javascript">
-        Sea('.content').hide()
-        Sea('.contentA').show()
+      Sea('.content').hide()
+      Sea('.contentA').show()
       Sea('.layui-tab-title').on('click', 'li', function (event) {
         Sea('.layui-tab-title li').removeClass('active')
         Sea(event.target).addClass('active')
