@@ -33,7 +33,7 @@
 
         </div>
         <div id="main_content_right_bottom">
-
+          <img src="/myData/picture/0_None.png" alt="分析结果图" >
         </div>
       </div>
     </div>
@@ -92,22 +92,6 @@
   <script type="text/javascript" src="./js/audio.js"></script>
   <script src="../../packages/bigsea.js"></script>
   <script type="text/javascript">
-    // $(function () {
-
-    // var song = [{
-    // // 'cover': 'images/cover2.jpg',
-    // 'src': 'http://music.163.com/song/media/outer/url?id=476592630.mp3',
-    // // 'src': './music/bg.mp3',
-    // 'title': 'Memories'
-    // }, ];
-
-    // var audioFn = audioPlay({
-    // song: song,
-    // autoPlay: false //是否立即播放第一首，autoPlay为true且song为空，会alert文本提示并退出
-    // });
-    // });
-  </script>
-  <script type="text/javascript">
     // 取参数
     let o = Sea.query(window.location.search)
     // console.log('🐸', o.songnum)
@@ -117,7 +101,7 @@
     Sea.Ajax({
       url: '/analyse.lyric',
       data: {
-        songName:o.songName,
+        songName: o.songName,
         songNum: o.songNum
       }
     }).then(res => {
@@ -134,16 +118,41 @@
         <pre>${lyric}</pre>`
         document.querySelector('#main_content_left').innerHTML = html
         var song = [{
-        'src' :'http://m10.music.126.net/20190708111443/aee7a0e94b8aee31b17192e4d50eee18/ymusic/dc3c/8c30/995f/b95302cb5199cc5d72d88b5ad2019717.mp3',
-        'title': songName
+          'src': songRef,
+          'title': songName
         }, ];
 
         var audioFn = audioPlay({
-        song: song,
-        autoPlay: false //是否立即播放第一首，autoPlay为true且song为空，会alert文本提示并退出
+          song: song,
+          autoPlay: false //是否立即播放第一首，autoPlay为true且song为空，会alert文本提示并退出
         });
       }
-          });
+      var song = [{
+        'src': songRef,
+        'title': songName
+      }, ];
+
+      var audioFn = audioPlay({
+        song: song,
+        autoPlay: false //是否立即播放第一首，autoPlay为true且song为空，会alert文本提示并退出
+      });
+    });
+
+    // Sea.Ajax({
+    //   url: '/analyse.tune',
+    //   data: {}
+    // }).then(res => {
+    //   // console.log('🐸', res)
+    //   let html = ''
+    //   if (res) {
+    //     let html = ''
+    //     // const picRoute = "../../../myData/picture/0_None.png"
+    //     // console.log('🐸', picRoute)
+    //     html += `
+    //   <img src="../../../myData/picture/0_None.png" alt="分析结果图">`
+    //     document.querySelector('#main_content_right_bottom').innerHTML = html
+    //   }
+    // });
 
 
     // Sea('#inputsearch').val(v)

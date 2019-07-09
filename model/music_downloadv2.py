@@ -65,9 +65,11 @@ class Spider(object):
     def __download_mp3(self, url):
         """下载mp3"""
         abspath = os.path.abspath('.')  # 获取绝对路径
-        os.chdir(abspath)
+        downloadPath = abspath+"/myData/MusicDownload"
+        print("downloadPath:",downloadPath)
+        os.chdir(downloadPath)
         response = requests.get(url, headers=self.headers).content
-        path = os.path.join(abspath)
+        path = os.path.join(downloadPath)
         with open('download.mp3', 'wb') as f:
             f.write(response)
             print('下载完毕,可以在%s   路径下查看' % path + '.mp3')
@@ -148,6 +150,9 @@ class Spider(object):
             print('歌曲需要收费，下载失败')
         else:
             self.__download_mp3(url)
+
+    def download_music(self, id):
+        return self.__download_music(id)
 
     def run(self,name):
     # while True:

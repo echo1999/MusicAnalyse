@@ -11,7 +11,9 @@ from flask import (
     redirect,
     url_for,
 )
-
+from model.MelLearning import(
+    figurePicData
+)
 
 # 先要初始化一个 Flask 实例
 # app = Flask(__name__, static_folder='views/statics')
@@ -40,7 +42,7 @@ def search():
 
 
 @app.route('/analyse.lyric', methods=['GET'])
-def lyric():
+def lyricAnalyse():
     spider = Spider()
     songs = spider.run(request.args['songName'])
     songs = json.loads(songs)
@@ -49,16 +51,18 @@ def lyric():
     for i in songs['data']:
         print(i)
         if int(request.args['songNum']) == i[0]:
-            print(i[8])
-            spider.__download_music(int(i[8]))
+            spider.download_music(int(i[8]))
             # return i[6]
             mylist = (i[1],i[6],i[7])
             myjson = json.dumps(mylist)
             # myjson = fp.json.dump(mylist)
             return myjson
-                
 
 
+@app.route('/analyse.tune', methods=['GET'])
+def tuneAnalyse():
+    figurePicData()
+    return True
 
 
 # 运行服务器

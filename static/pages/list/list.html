@@ -80,8 +80,7 @@
             const e = res.data[i]
             const name = e[1]
             const singer = e[2]
-            const
-              album = e[3]
+            const album = e[3]
             const min = e[4]
             const second = e[5]
             const time = e[4] + ":" + e[5]
@@ -112,8 +111,9 @@
     })
     // 取参数
     let o = Sea.query(window.location.search)
+    console.log('🐸', o)
     // 传入 input 因为 url 不能带中文 所以要解析一下
-    let v = decodeURIComponent(o.search)
+    let v = decodeURIComponent(o.songName)
     Sea('#inputsearch').val(v)
     Sea('#search').click()
   </script>
