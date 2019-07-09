@@ -8,7 +8,7 @@ import codecs
 import os
 import json
 import re
-
+import shutil
 import sys
 import imp
 imp.reload(sys)
@@ -65,7 +65,9 @@ class Spider(object):
     def __download_mp3(self, url):
         """下载mp3"""
         abspath = os.path.abspath('.')  # 获取绝对路径
-        downloadPath = abspath+"/myData/MusicDownload"
+        # downloadPath = abspath+"/myData/MusicDownload"
+        # shutil.copyfile(abspath, dstfile)
+        downloadPath = abspath
         print("downloadPath:",downloadPath)
         os.chdir(downloadPath)
         response = requests.get(url, headers=self.headers).content
@@ -73,6 +75,10 @@ class Spider(object):
         with open('download.mp3', 'wb') as f:
             f.write(response)
             print('下载完毕,可以在%s   路径下查看' % path + '.mp3')
+        oldpath = abspath+"\download.mp3"
+        print("oldpath:", oldpath)
+        newpath = r"C:\Users\echo1999\Documents\Github\MusicAnalyse\static\myData\musicDownload\download.mp3"
+        shutil.copyfile(oldpath, newpath)
     #获得歌词
     def __download_lyric_by_musicId(self,music_id):
         url = "http://music.163.com/api/song/lyric?" +"id=" + str(music_id) + "&lv=1&kv=1&tv=-1"
@@ -162,8 +168,8 @@ class Spider(object):
             print('没有搜到此歌曲，请换个关键字')
         else:
             songs = self.__print_info(songs['songs'])
-            print(type(songs))
-            print(songs)
+            # print(type(songs))
+            # print(songs)
         return songs
             #num = input('请输入需要下载的歌曲，输入左边对应数字即可')
             #url = self.__get_mp3(songs[int(num)][1])

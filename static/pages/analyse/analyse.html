@@ -30,93 +30,110 @@
       </div>
       <div id="main_content_right">
         <div id="main_content_right_top">
-
+          <div class="layui-tab layui-tab-card">
+            <!-- 标签 -->
+            <ul class="layui-tab-title">
+              <li class="active tabA">歌词分析</li>
+              <li class="tabB">曲调分析</li>
+            </ul>
+          </div>
+          <div class="content contentA">内容A</div>
+          <div class="content contentB">内容B</div>
         </div>
         <div id="main_content_right_bottom">
-          <img src="/myData/picture/0_None.png" alt="分析结果图" >
+          <!-- <img src="/myData/picture/0_None.png" alt="分析结果图" > -->
         </div>
       </div>
-    </div>
-    <!-- <script src="/demos/googlegg.js"></script> -->
-    <div class="audio-box">
-      <div class="audio-container">
-        <div class="audio-view">
-          <!-- <div class="audio-cover" ></div> -->
-          <div class="audio-body">
-            <h3 class="audio-title">未知歌曲</h3>
-            <div class="audio-backs">
-              <div class="audio-this-time">00:00</div>
-              <div class="audio-count-time">00:00</div>
-              <div class="audio-setbacks">
-                <i class="audio-this-setbacks">
-                  <span class="audio-backs-btn"></span>
-                </i>
-                <span class="audio-cache-setbacks">
-                </span>
+      <!-- <script src="/demos/googlegg.js"></script> -->
+      <div class="audio-box">
+        <div class="audio-container">
+          <div class="audio-view">
+            <!-- <div class="audio-cover" ></div> -->
+            <div class="audio-body">
+              <h3 class="audio-title">未知歌曲</h3>
+              <div class="audio-backs">
+                <div class="audio-this-time">00:00</div>
+                <div class="audio-count-time">00:00</div>
+                <div class="audio-setbacks">
+                  <i class="audio-this-setbacks">
+                    <span class="audio-backs-btn"></span>
+                  </i>
+                  <span class="audio-cache-setbacks">
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="audio-btn">
+              <div class="audio-select">
+                <div class="audio-play"></div>
+                <div class="audio-volume"></div>
+              </div>
+              <div class="audio-set-volume">
+                <div class="volume-box">
+                  <i><span></span></i>
+                </div>
+              </div>
+              <div class="audio-list">
+                <div class="audio-list-head">
+                  <p>歌单</p>
+                  <span class="menu-close">关闭</span>
+                </div>
+                <ul class="audio-inline">
+                </ul>
               </div>
             </div>
           </div>
-          <div class="audio-btn">
-            <div class="audio-select">
-              <div class="audio-play"></div>
-              <div class="audio-volume"></div>
-            </div>
-            <div class="audio-set-volume">
-              <div class="volume-box">
-                <i><span></span></i>
-              </div>
-            </div>
-            <div class="audio-list">
-              <div class="audio-list-head">
-                <p>歌单</p>
-                <span class="menu-close">关闭</span>
-              </div>
-              <ul class="audio-inline">
-              </ul>
-            </div>
-          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script src="../bideo.js"></script>
-  <script src="../main.js"></script>
+    <script src="../bideo.js"></script>
+    <script src="../main.js"></script>
 
-  <script>
-    if (window.location.host.indexOf('github.io') !== -1 && window.location.protocol !== "https:") {
-      window.location.protocol = "https";
-    }
-  </script>
-  <script type="text/javascript" src="./js/jquery.min.js"></script>
-  <script type="text/javascript" src="./js/audio.js"></script>
-  <script src="../../packages/bigsea.js"></script>
-  <script type="text/javascript">
-    // 取参数
-    let o = Sea.query(window.location.search)
-    // console.log('🐸', o.songnum)
-    // console.log('🐸', type(o.songnum))
-    // 传入 input 因为 url 不能带中文 所以要解析一下
-    // let v = decodeURIComponent(o.songID)
-    Sea.Ajax({
-      url: '/analyse.lyric',
-      data: {
-        songName: o.songName,
-        songNum: o.songNum
+    <script>
+      if (window.location.host.indexOf('github.io') !== -1 && window.location.protocol !== "https:") {
+        window.location.protocol = "https";
       }
-    }).then(res => {
-      console.log('🐸', res)
-      let html = ''
-      if (res) {
+    </script>
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/audio.js"></script>
+    <script src="../../packages/bigsea.js"></script>
+    <script type="text/javascript">
+      // 取参数
+      let o = Sea.query(window.location.search)
+      // console.log('🐸', o.songnum)
+      // console.log('🐸', type(o.songnum))
+      // 传入 input 因为 url 不能带中文 所以要解析一下
+      // let v = decodeURIComponent(o.songID)
+      Sea.Ajax({
+        url: '/analyse.lyric',
+        data: {
+          songName: o.songName,
+          songNum: o.songNum
+        }
+      }).then(res => {
+        console.log('🐸', res)
         let html = ''
-        const songName = res[0]
-        const lyric = res[1]
-        const songRef = res[2]
-        console.log('🐸', songRef)
-        html += `
+        if (res) {
+          let html = ''
+          const songName = res[0]
+          const lyric = res[1]
+          const songRef = res[2]
+          console.log('🐸', songRef)
+          html += `
         <h1>${songName}</h1>
         <pre>${lyric}</pre>`
-        document.querySelector('#main_content_left').innerHTML = html
+          document.querySelector('#main_content_left').innerHTML = html
+          var song = [{
+            'src': songRef,
+            'title': songName
+          }, ];
+
+          var audioFn = audioPlay({
+            song: song,
+            autoPlay: false //是否立即播放第一首，autoPlay为true且song为空，会alert文本提示并退出
+          });
+        }
         var song = [{
           'src': songRef,
           'title': songName
@@ -126,38 +143,45 @@
           song: song,
           autoPlay: false //是否立即播放第一首，autoPlay为true且song为空，会alert文本提示并退出
         });
-      }
-      var song = [{
-        'src': songRef,
-        'title': songName
-      }, ];
-
-      var audioFn = audioPlay({
-        song: song,
-        autoPlay: false //是否立即播放第一首，autoPlay为true且song为空，会alert文本提示并退出
       });
-    });
 
-    // Sea.Ajax({
-    //   url: '/analyse.tune',
-    //   data: {}
-    // }).then(res => {
-    //   // console.log('🐸', res)
-    //   let html = ''
-    //   if (res) {
-    //     let html = ''
-    //     // const picRoute = "../../../myData/picture/0_None.png"
-    //     // console.log('🐸', picRoute)
-    //     html += `
-    //   <img src="../../../myData/picture/0_None.png" alt="分析结果图">`
-    //     document.querySelector('#main_content_right_bottom').innerHTML = html
-    //   }
-    // });
+      Sea.Ajax({
+        url: '/analyse.tune',
+        data: {}
+      }).then(res => {
+        // console.log('🐸', res)
+        let html = ''
+        if (res == "ok") {
+          let html = ''
+          // const picRoute = "../../../myData/picture/0_None.png"
+          // console.log('🐸', picRoute)
+          html += `
+      <img src="/myData/picture/0_None.png" alt="分析结果图">`
+          document.querySelector('#main_content_right_bottom').innerHTML = html
+        }
+      });
 
 
-    // Sea('#inputsearch').val(v)
-    // Sea('#search').click()
-  </script>
+      // Sea('#inputsearch').val(v)
+      // Sea('#search').click() good
+    </script>
+    <script type="text/javascript">
+        Sea('.content').hide()
+        Sea('.contentA').show()
+      Sea('.layui-tab-title').on('click', 'li', function (event) {
+        Sea('.layui-tab-title li').removeClass('active')
+        Sea(event.target).addClass('active')
+
+        Sea('.content').hide()
+        if (Sea(event.target).hasClass('tabA')) {
+          Sea('.contentA').show()
+        } else {
+          Sea('.contentB').show()
+        }
+
+
+      })
+    </script>
 </body>
 
 </html>

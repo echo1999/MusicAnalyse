@@ -97,20 +97,16 @@ def getMelPic(export_path, mfccPic_path):
         else:
             print("这不是一个wav文件")
 
-def figurePicData():
-    unprocessed_file = "C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/MusicDownload"  # 待处理音频文件所在目录
-    transedToWav = "C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/wav/"  # 格式转换完毕后存放地址
-    mfccPic_path = "C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/picture"  # 存放wav格式文件转换mel频谱图的目录
-    transFormat(unprocessed_file, transedToWav)
-    getMelPic(transedToWav, mfccPic_path)
-    # shutil.rmtree('../myData/MusicDownload')
-    # os.mkdir('../myData/MusicDownload')
-    # shutil.rmtree('../myData/picture')
-    # os.mkdir('../myData/picture')
-    if os.listdir('C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/wav') != []:
-        os.remove('C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/wav/0.wav')
-    if os.listdir('C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/MusicDownload') != []:
-        os.remove('C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/MusicDownload/download.mp3')
+# def figurePicData():
+#     unprocessed_file = "C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/MusicDownload"  # 待处理音频文件所在目录
+#     transedToWav = "C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/wav/"  # 格式转换完毕后存放地址
+#     mfccPic_path = "C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/picture"  # 存放wav格式文件转换mel频谱图的目录
+#     transFormat(unprocessed_file, transedToWav)
+#     getMelPic(transedToWav, mfccPic_path)
+#     if os.listdir('C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/wav') != []:
+#         os.remove('C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/wav/0.wav')
+#     if os.listdir('C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/MusicDownload') != []:
+#         os.remove('C:/Users/echo1999/Documents/Github/MusicAnalyse/myData/MusicDownload/download.mp3')
     # os.remove(
     #         '../myData/wav/0.wav')
 
