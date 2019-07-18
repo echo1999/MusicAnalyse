@@ -141,8 +141,8 @@ body {
 
 img {
 	margin-top: 20px;
-	margin-left: 20px;
-	height: 80%;
+	margin-left: 40px;
+	height: 84%;
 }
 
 .layui-tab-card {
@@ -209,7 +209,7 @@ ul {
 }
 /* 这里的含义是 li 并且 有 active class 的那个一个 try */
 .layui-tab-title .active {
-	background: rgba(255,255,255, 0.6);
+	background: rgba(255, 255, 255, 0.6);
 }
 li,
 ul {
@@ -234,4 +234,25 @@ ul {
 	border-top: none;
 	border-width: 0px;
 	border-bottom-color: #fff;
+}
+
+.content{
+	color: #fff;
+	font-size: 24px;
+	margin-top:15px;
+	margin-bottom: 10px;
+}
+
+.item {
+	padding: 10px 10px 15px 20px;
+	border: 1px solid #fff;
+	position: relative;
+	background-color: rgba(255, 255, 255, 0.9);
+	border-radius: 3px;
+}
+
+/* 2n 为每隔一行样式不同 */
+.item:nth-of-type(2n) {
+	background-color: rgba(240,240,240,0.6);
+	border-radius: 3px;
 }

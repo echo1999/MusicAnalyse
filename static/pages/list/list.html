@@ -73,7 +73,6 @@
           search: Sea('#inputsearch').val()
         }
       }).then(res => {
-        // console.log('🐸', res)
         if (res.ok) {
           let html = ''
           for (let i = 0; i < res.data.length; i++) {
@@ -84,7 +83,6 @@
             const min = e[4]
             const second = e[5]
             const time = e[4] + ":" + e[5]
-            // console.log('🐸', name, singer,album, time) // html1=`<div class="item">34234</div>`
             html += `<div class="item" data-key=${i}>
             <div class="name"> ${name}</div>
             <div class="singer">${singer}</div>
@@ -92,9 +90,7 @@
             <div class="time">${time}</div>
           </div>`
           }
-          // document.querySelector('#list').innerHTML = html1
           document.querySelector('#list').innerHTML = html
-          // document.querySelector('#list').innerHTML = html
         }
       })
     })
@@ -105,17 +101,16 @@
       let name = Sea('#inputsearch').val()
       if (num >= 0) {
         // let o = Sea.query(window.location.search)
-        Sea.Ajax({
+        Sea.Ajax({ //先判断歌曲是否收费
           url: '/list.isFree',
           data: {
             songName: name,
             songNum: num
           }
         }).then(res => {
-          // console.log('🐸', res)
-          if (res == "isFree") {
+          if (res == "isFree") { //如果免费则跳转
             window.location.href = '/pages/analyse/analyse.html?songName=' + name + '&songNum=' + num
-          } else {
+          } else { //否则提示用户换一首歌
             alert("歌曲需要收费，无法解析，请换一首歌")
           }
         })

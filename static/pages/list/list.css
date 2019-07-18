@@ -179,6 +179,7 @@ input::-webkit-input-placeholder {
   padding: 10px 10px 25px 18px;
   border: 1px solid #fff;
   position: relative;
+  cursor: pointer;
 }
 
 /* 2n 为每隔一行样式不同 */

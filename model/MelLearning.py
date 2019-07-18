@@ -7,6 +7,7 @@ import librosa.display
 import numpy as np
 import matplotlib.pyplot as plt
 from pydub import AudioSegment
+from PIL import Image 
 
 def transFormat(import_path, export_path):
     print("import_path:", import_path)
@@ -28,25 +29,32 @@ def transFormat(import_path, export_path):
                 print('MP3文件有问题')
                 continue
 
-            # cutted_wav = AudioSegment.from_wav(processed_file)
-            cutted_wav = cutted_wav[25*1000:]
-            wav_len = len(cutted_wav)
-            cutted_wav = cutted_wav[: wav_len-25*1000]
-            # 取中间截取后的前40秒
-            wav_len = wav_len/2
-            # print(wav_len)
-            if wav_len <= 39*1000:
-                continue
-            else:
-                # print('到这里了没啊')
-                cutted_wav = cutted_wav[wav_len - 41*1000:wav_len-1]
-
-            wav_len = len(cutted_wav)
-            # print('到这里了没', len(cutted_wav))  # 没到
-            if len(cutted_wav) == 40999:
+            if len(cutted_wav) > 70*1000:
+                cutted_wav = cutted_wav[30*1000:70*1000]
                 cutted_wav.export(processed_file, format="wav")
             else:
-                continue
+                return "tooShort"
+
+
+            # # cutted_wav = AudioSegment.from_wav(processed_file)
+            # cutted_wav = cutted_wav[25*1000:]
+            # wav_len = len(cutted_wav)
+            # cutted_wav = cutted_wav[: wav_len-25*1000]
+            # # 取中间截取后的前40秒
+            # wav_len = wav_len/2
+            # # print(wav_len)
+            # if wav_len <= 39*1000:
+            #     continue
+            # else:
+            #     # print('到这里了')
+            #     cutted_wav = cutted_wav[wav_len - 41*1000:wav_len-1]
+
+            # wav_len = len(cutted_wav)
+            # # print('到这里了没', len(cutted_wav))  # 没到
+            # if len(cutted_wav) == 40999:
+            #     cutted_wav.export(processed_file, format="wav")
+            # else:
+            #     continue
 
 
 def getMelPic(export_path, mfccPic_path):
@@ -89,6 +97,23 @@ def getMelPic(export_path, mfccPic_path):
             plt.savefig(mfccPic_path + os.sep + splited_name[0] + "_None.png")
 
             plt.close()
+
+            plt.figure(figsize=(19.2, 4.8))
+
+            librosa.display.waveplot(x, sr=fs)
+            plt.margins(0, 0)
+            plt.savefig(mfccPic_path + os.sep + "1_show_None" + ".png")
+
+            plt.close()
+
+            img = Image.open(mfccPic_path + os.sep + "1_show_None" + ".png")
+            img = img.convert("RGBA")  # 转换获取信息
+
+            box = (190, 0, 1760, 460)
+            img = img.crop(box)
+
+            img.save(mfccPic_path + os.sep + "1_show_None" + ".png")
+
             # X = librosa.stft(x)
             # Xdb = librosa.amplitude_to_db(abs(X))
             # plt.figure(figsize=(14, 5))

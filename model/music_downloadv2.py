@@ -76,7 +76,7 @@ class Spider(object):
             f.write(response)
             print('下载完毕,可以在%s   路径下查看' % path + '.mp3')
         oldpath = abspath+"\download.mp3"
-        print("oldpath:", oldpath)
+        # print("oldpath:", oldpath)
         newpath = r"C:\Users\echo1999\Documents\Github\MusicAnalyse\static\myData\musicDownload\download.mp3"
         shutil.copyfile(oldpath, newpath)
     #获得歌词
@@ -147,7 +147,7 @@ class Spider(object):
         json_str = json.dumps(song_json, indent=4)
         # print(json_str)
         # json_file.write(json_str)
-        print("json_str:",type(json_str))
+        # print("json_str:",type(json_str))
         return json_str
     #下载mp3到本地
     def __download_music(self,id):
@@ -162,27 +162,12 @@ class Spider(object):
         return self.__download_music(id)
 
     def run(self,name):
-    # while True:
-    #     name = input('请输入你需要下载的歌曲：')
         songs = self.__get_songs(name)
         if songs['songCount'] == 0:
             print('没有搜到此歌曲，请换个关键字')
         else:
             songs = self.__print_info(songs['songs'])
-            # print(type(songs))
-            # print(songs)
         return songs
-            #num = input('请输入需要下载的歌曲，输入左边对应数字即可')
-            #url = self.__get_mp3(songs[int(num)][1])
-            # if not url:
-            #     print('歌曲需要收费，下载失败')
-            # else:
-            #     filename = songs[int(num)][0]
-            #     self.__download_mp3(url, filename)
-            # flag = input('如需继续可以按任意键进行搜歌，否则按0结束程序')
-            # if flag == '0':
-            #     break
-            # print('程序结束！')
 
     # 返回每个歌曲的params
     def __get_music_url(self,id):
